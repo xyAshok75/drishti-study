@@ -266,7 +266,7 @@
 
   <script>
     // DEMO ONLY: replace this local sample with a secured Supabase read endpoint after RLS policies are configured.
-    const demoLibraries = [
+    let demoLibraries = [
       {id:1,name:"Quiet Corner Library",area:"Central",city:"Bikaner",address:"Central area · Demo location",total:80,available:12,fee:800,open:true,updatedMinutes:8,verified:false},
       {id:2,name:"Focus Study Hub",area:"Bikaner",city:"Bikaner",address:"Coaching zone · Demo location",total:100,available:7,fee:1000,open:true,updatedMinutes:24,verified:false},
       {id:3,name:"The Reading Room",area:"Nokha",city:"Nokha",address:"Nokha · Demo location",total:60,available:0,fee:650,open:true,updatedMinutes:72,verified:false},
@@ -341,6 +341,56 @@
     document.getElementById('interestForm').addEventListener('submit',e=>{e.preventDefault();closeModal();e.target.reset();showToast('Prototype form only — no details were sent or saved. Backend connection is the next step.');});
     document.getElementById('year').textContent=new Date().getFullYear();
     render();
+    const SUPABASE_URL = "https://evlrjnkxnpdlltfgnssk.supabase.co";
+const SUPABASE_KEY = "sb_publishable_A7Louxud_hNS9YQxn8iQsQ_ODoSZP0Y";
+
+async function loadLibrariesFromSupabase() {
+    try {
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/libraries?select=id,name,city,address,total_seats,available_seats,monthly_fee,is_open,last_updated&order=name.asc`,
+            {
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`Supabase error: ${response.status}`);
+        }
+
+        const rows = await response.json();
+
+        demoLibraries = rows.map((row, index) => ({
+            id: row.id,
+            name: row.name,
+            area: row.city || "Bikaner",
+            city: row.city || "Bikaner",
+            address: row.address || row.city || "Address unavailable",
+            total: row.total_seats,
+            available: row.available_seats,
+            fee: row.monthly_fee || 0,
+            open: row.is_open,
+            updatedMinutes: Math.max(
+                0,
+                Math.floor(
+                    (Date.now() - new Date(row.last_updated).getTime()) / 60000
+                )
+            ),
+            verified: false
+        }));
+
+        render();
+        console.log("Supabase libraries loaded:", rows.length);
+
+    } catch (error) {
+        console.error("Supabase connection failed:", error);
+        showToast("Database connection failed. Demo data is being shown.");
+    }
+}
+
+loadLibrariesFromSupabase();
   </script>
 </body>
 </html>
