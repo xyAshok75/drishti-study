@@ -212,7 +212,7 @@
           <select class="filter-select" id="areaFilter" aria-label="Filter by city"><option value="">All cities</option></select>
           <select class="filter-select" id="availabilityFilter" aria-label="Filter by seat availability"><option value="all">Any availability</option><option value="available">Seats available</option><option value="full">Currently full</option></select>
           <select class="filter-select" id="feeFilter" aria-label="Sort by fee"><option value="recommended">Recommended order</option><option value="low">Fee: low to high</option><option value="high">Fee: high to low</option><option value="seats">Most seats available</option></select>
-          <span class="results-count" id="resultsCount" aria-live="polite">Loading library listings…</span>
+          <button class="btn btn-dark" type="button" id="nearbyBtn">📍 Find nearby</button><span class="results-count" id="resultsCount" aria-live="polite">Loading library listings…</span>
         </div>
         <div class="cards" id="libraryCards"></div>
         <div class="notice"><span>ⓘ</span><div><strong>Availability transparency:</strong> Seat counts and fees are based on the latest information saved by the library owner. In the live version, each library's authorised owner will update availability and the page will show the last reported time. A recent report still cannot guarantee a seat.</div></div>
@@ -273,6 +273,8 @@
 
   <script>
     // DEMO ONLY: replace this local sample with a secured Supabase read endpoint after RLS policies are configured.
+    let userLocation = null;
+    let nearbyMode = false;
     let demoLibraries = [
       {id:1,name:"Quiet Corner Library",area:"Central",city:"Bikaner",address:"Central area · Demo location",total:80,available:12,fee:800,open:true,updatedMinutes:8,verified:false},
       {id:2,name:"Focus Study Hub",area:"Bikaner",city:"Bikaner",address:"Coaching zone · Demo location",total:100,available:7,fee:1000,open:true,updatedMinutes:24,verified:false},
@@ -315,12 +317,13 @@
           (availabilityFilter.value === 'full' && lib.open && lib.available === 0);
         return matchesQuery && matchesArea && matchesAvailability;
       });
-      if(feeFilter.value === 'low') list.sort((a,b)=>a.fee-b.fee);
+      if(nearbyMode && userLocation){list=list.filter(lib=>Number.isFinite(lib.latitude)&&Number.isFinite(lib.longitude));list.sort((a,b)=>distanceKm(userLocation.latitude,userLocation.longitude,a.latitude,a.longitude)-distanceKm(userLocation.latitude,userLocation.longitude,b.latitude,b.longitude));}
+      else if(feeFilter.value === 'low') list.sort((a,b)=>a.fee-b.fee);
       if(feeFilter.value === 'high') list.sort((a,b)=>b.fee-a.fee);
       if(feeFilter.value === 'seats') list.sort((a,b)=>b.available-a.available);
       document.getElementById('statSeats').textContent = demoLibraries.reduce((n,l)=>n+(l.open && l.updatedMinutes<=60?l.available:0),0);
       document.getElementById('statLibraries').textContent = demoLibraries.length;
-      resultsCount.textContent = `Showing ${list.length} of ${demoLibraries.length} listings`;
+      resultsCount.textContent = nearbyMode ? `Showing ${list.length} nearby listings with map coordinates` : `Showing ${list.length} of ${demoLibraries.length} listings`;
       if(!list.length){cards.innerHTML='<div class="empty"><strong>No matching libraries</strong><p style="margin:8px 0 0;font-size:12px">Try another search or clear your filters.</p></div>';return;}
       cards.innerHTML = list.map(lib=>{
         const [label,state]=seatLabel(lib);
@@ -330,7 +333,7 @@
         return `<article class="library-card">
           <div class="card-art"><span class="art-tag">● ${label}</span><span class="art-symbol">${art}</span><div class="art-bottom">${safeText(lib.area || lib.city || 'BIKANER').toUpperCase()}</div></div>
           <div class="card-body">
-            <div class="card-title-row"><div><h3 class="card-title">${safeText(lib.name)}</h3><div class="location">⌖ ${safeText(lib.address || lib.city || 'Address not provided')}</div></div><span class="verified">${isDemo?'DEMO':'OWNER LISTED'}</span></div>
+            <div class="card-title-row"><div><h3 class="card-title">${safeText(lib.name)}</h3><div class="location">⌖ ${safeText(lib.address || lib.city || 'Address not provided')}${nearbyMode && userLocation && Number.isFinite(lib.latitude) && Number.isFinite(lib.longitude) ? ` · ${distanceKm(userLocation.latitude,userLocation.longitude,lib.latitude,lib.longitude).toFixed(1)} km away` : ''}</div></div><span class="verified">${isDemo?'DEMO':'OWNER LISTED'}</span></div>
             <div class="seat-block"><div class="seat-top"><span>Reported seat availability</span><strong>${Number(lib.available) || 0} / ${Number(lib.total) || 0}</strong></div><div class="progress"><span style="width:${pct}%;${state==='full'?'background:#d5a04a':''}"></span></div></div>
             <div class="card-meta"><div class="fee"><small>Monthly fee</small><strong>${rupee(lib.fee)}<span style="font:500 10px 'DM Sans';color:#89968e"> / mo</span></strong></div><div class="updated"><small>Last report</small><strong>${updatedText(lib.updatedMinutes)}</strong></div></div>
             <div class="card-actions"><button class="btn btn-dark" data-details="${safeText(lib.id)}">View details <span>→</span></button><button class="btn text-btn" data-contact="${safeText(lib.id)}" aria-label="Contact ${safeText(lib.name)}">Contact</button></div>
@@ -341,6 +344,8 @@
 
     function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove('show'),3200);}
     [areaFilter,availabilityFilter,feeFilter].forEach(el=>el.addEventListener('change',render));
+    function distanceKm(lat1,lon1,lat2,lon2){const rad=n=>n*Math.PI/180;const dLat=rad(lat2-lat1),dLon=rad(lon2-lon1);const a=Math.sin(dLat/2)**2+Math.cos(rad(lat1))*Math.cos(rad(lat2))*Math.sin(dLon/2)**2;return 6371*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));}
+    document.getElementById('nearbyBtn').addEventListener('click',()=>{if(!navigator.geolocation){showToast('Location is not supported by this browser.');return;}const btn=document.getElementById('nearbyBtn');btn.disabled=true;btn.textContent='Finding location…';navigator.geolocation.getCurrentPosition(pos=>{userLocation={latitude:pos.coords.latitude,longitude:pos.coords.longitude};nearbyMode=true;btn.disabled=false;btn.textContent='📍 Nearby: on';render();if(!demoLibraries.some(lib=>Number.isFinite(lib.latitude)&&Number.isFinite(lib.longitude)))showToast('Location found, but libraries need coordinates added by their owners first.');else showToast('Showing libraries nearest to your location.');},err=>{btn.disabled=false;btn.textContent='📍 Find nearby';showToast(err.code===1?'Allow location access to find nearby libraries.':'Could not get your location. Try again.');},{enableHighAccuracy:false,timeout:12000,maximumAge:300000});});
     searchInput.addEventListener('input',render);
     document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('libraries').scrollIntoView({behavior:'smooth'});render();});
     const detailsBackdrop=document.getElementById('detailsBackdrop');
@@ -400,7 +405,7 @@ const SUPABASE_KEY = "sb_publishable_A7Louxud_hNS9YQxn8iQsQ_ODoSZP0Y";
 async function loadLibrariesFromSupabase() {
     try {
         const response = await fetch(
-            `${SUPABASE_URL}/rest/v1/libraries?select=id,name,city,address,phone,maps_url,total_seats,available_seats,monthly_fee,is_open,last_updated&order=name.asc`,
+            `${SUPABASE_URL}/rest/v1/libraries?select=id,name,city,address,phone,maps_url,latitude,longitude,total_seats,available_seats,monthly_fee,is_open,last_updated&order=name.asc`,
             {
                 headers: {
                     apikey: SUPABASE_KEY,
@@ -423,6 +428,8 @@ async function loadLibrariesFromSupabase() {
             address: row.address || row.city || "Address unavailable",
             phone: row.phone || "",
             mapsUrl: row.maps_url || "",
+            latitude: row.latitude === null ? null : Number(row.latitude),
+            longitude: row.longitude === null ? null : Number(row.longitude),
             total: row.total_seats,
             available: row.available_seats,
             fee: row.monthly_fee || 0,
