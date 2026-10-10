@@ -345,6 +345,22 @@
     document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('libraries').scrollIntoView({behavior:'smooth'});render();});
     const detailsBackdrop=document.getElementById('detailsBackdrop');
     function closeDetails(){detailsBackdrop.classList.remove('open');}
+    function phoneDigits(value){ return String(value || '').replace(/\D/g,''); }
+    function mapsLink(lib){
+      const raw=String(lib.mapsUrl || '').trim();
+      if(/^https?:\/\//i.test(raw) && /google\.|maps\.app\.goo\.gl|goo\.gl/i.test(raw)) return raw;
+      return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent([lib.name,lib.address,lib.city].filter(Boolean).join(', '));
+    }
+    function contactActions(lib){
+      const digits=phoneDigits(lib.phone);
+      const phoneOk=digits.length>=10;
+      const whatsappDigits=digits.startsWith('0') ? digits.slice(1) : digits;
+      return `<div class="card-actions" style="margin-top:14px">
+        ${phoneOk ? `<a class="btn btn-dark" href="tel:${safeText(lib.phone)}">Call owner</a>` : `<span class="form-help">No contact number added yet.</span>`}
+        ${phoneOk ? `<a class="btn btn-outline" target="_blank" rel="noopener" href="https://wa.me/${safeText(whatsappDigits)}">WhatsApp</a>` : ''}
+        <a class="btn btn-outline" target="_blank" rel="noopener" href="${safeText(mapsLink(lib))}">Google Maps ↗</a>
+      </div>`;
+    }
     function openDetails(lib){
       if(!lib) return;
       document.getElementById('detailsTitle').textContent=lib.name;
@@ -354,14 +370,15 @@
         <div class="step" style="padding:16px;margin:10px 0"><strong>Monthly fee</strong><p style="margin:7px 0 0;color:var(--muted)">${rupee(lib.fee)} per month</p></div>
         <div class="step" style="padding:16px;margin:10px 0"><strong>Status</strong><p style="margin:7px 0 0;color:var(--muted)">${lib.open?'Currently marked open':'Currently marked closed'}</p></div>
         <div class="step" style="padding:16px;margin:10px 0"><strong>Last update</strong><p style="margin:7px 0 0;color:var(--muted)">${updatedText(lib.updatedMinutes)}</p></div>
-        <p class="form-help">Availability is owner-reported and is not a reservation. Contact the library to confirm before visiting. A contact number has not been added to this listing yet.</p>`;
+        ${contactActions(lib)}
+        <p class="form-help" style="margin-top:12px">Availability is owner-reported and is not a reservation. Confirm before visiting.</p>`;
       detailsBackdrop.classList.add('open');
     }
     cards.addEventListener('click',e=>{
       const detailBtn=e.target.closest('[data-details]');
       if(detailBtn){openDetails(demoLibraries.find(x=>String(x.id)===String(detailBtn.dataset.details)));return;}
       const contactBtn=e.target.closest('[data-contact]');
-      if(contactBtn){const lib=demoLibraries.find(x=>String(x.id)===String(contactBtn.dataset.contact));showToast(`${lib?.name || 'Library'}: contact details have not been added yet.`);}
+      if(contactBtn){const lib=demoLibraries.find(x=>String(x.id)===String(contactBtn.dataset.contact));if(lib)openDetails(lib);}
     });
     document.getElementById('closeDetails').addEventListener('click',closeDetails);
     document.getElementById('detailsDone').addEventListener('click',closeDetails);
@@ -383,7 +400,7 @@ const SUPABASE_KEY = "sb_publishable_A7Louxud_hNS9YQxn8iQsQ_ODoSZP0Y";
 async function loadLibrariesFromSupabase() {
     try {
         const response = await fetch(
-            `${SUPABASE_URL}/rest/v1/libraries?select=id,name,city,address,total_seats,available_seats,monthly_fee,is_open,last_updated&order=name.asc`,
+            `${SUPABASE_URL}/rest/v1/libraries?select=id,name,city,address,phone,maps_url,total_seats,available_seats,monthly_fee,is_open,last_updated&order=name.asc`,
             {
                 headers: {
                     apikey: SUPABASE_KEY,
@@ -404,6 +421,8 @@ async function loadLibrariesFromSupabase() {
             area: row.city || "Other",
             city: row.city || "Bikaner",
             address: row.address || row.city || "Address unavailable",
+            phone: row.phone || "",
+            mapsUrl: row.maps_url || "",
             total: row.total_seats,
             available: row.available_seats,
             fee: row.monthly_fee || 0,
