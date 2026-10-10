@@ -102,54 +102,68 @@
     .verified{font-size:10px;color:#4d7c3d;background:#edf7e7;border-radius:7px;padding:5px 7px;font-weight:800;white-space:nowrap}
     .seat-block{margin:18px 0 14px;background:#f5f8f2;border-radius:14px;padding:13px}
     .seat-top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}
-    .seat-top span{font-size:11px;color:#87938a}
-    .seat-top strong{font-size:13px;color:#397649}
-    .progress{height:7px;background:#e0e9dc;border-radius:99px;overflow:hidden}
-    .progress span{display:block;height:100%;border-radius:99px;background:#7ebd5d}
-    .card-meta{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:17px}
-    .fee small,.updated small{display:block;font-size:10px;color:#8a968e;margin-bottom:6px}
-    .fee strong{font:800 20px Manrope,sans-serif;letter-spacing:-.5px}
-    .updated{text-align:right}
-    .updated strong{display:block;font-size:10px;color:#53645a}
-    .card-actions{display:flex;gap:9px}
-    .btn-dark{background:var(--deep2);color:white;flex:1}
-    .text-btn{background:white;border:1px solid var(--line);color:#53645a}
-    .empty{grid-column:1/-1;padding:40px;text-align:center;background:white;border:1px dashed #d7e2d5;border-radius:18px;color:var(--muted)}
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-    .step{background:white;border:1px solid var(--line);border-radius:20px;padding:24px}
-    .step-no{height:44px;width:44px;border-radius:13px;background:var(--deep);color:var(--green);display:grid;place-items:center;font-weight:800;margin-bottom:20px}
-    .step h3{font:800 17px Manrope,sans-serif;margin-bottom:9px}
-    .step p{color:var(--muted);font-size:13px;line-height:1.75;margin-bottom:0}
-    .owner-cta{background:var(--deep);color:white;border-radius:28px;padding:42px;position:relative;overflow:hidden}
-    .owner-cta:after{content:"";position:absolute;width:400px;height:400px;border-radius:50%;border:1px solid rgba(186,243,106,.12);right:5%;top:-260px;box-shadow:0 0 0 45px rgba(186,243,106,.025),0 0 0 90px rgba(186,243,106,.02)}
-    .owner-cta-content{position:relative;z-index:1;max-width:650px}
-    .owner-cta h2{font-size:clamp(27px,3vw,38px)}
-    .owner-cta p{color:#b9c8be;line-height:1.8;font-size:14px;max-width:590px}
-    .footer{background:#eaf0e7;padding:30px 0;color:#75847a}
-    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;font-size:11px}
-    .modal-backdrop{position:fixed;inset:0;z-index:50;background:rgba(4,14,9,.65);display:none;align-items:center;justify-content:center;padding:18px}
+    .seat-top span{font-size:11px;color:#68786d}
+    .seat-top strong{font-size:13px;color:#2b743d}
+    .progress{height:6px;background:#dfe8da;border-radius:99px;overflow:hidden}
+    .progress span{display:block;height:100%;background:#79b94e;border-radius:99px}
+    .card-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:13px 0 16px}
+    .fee small,.updated small{display:block;color:#89968e;font-size:10px;margin-bottom:4px}
+    .fee strong{font:800 17px Manrope,sans-serif}
+    .updated{text-align:right}.updated strong{font-size:10px;color:#53645a}
+    .card-actions{display:grid;grid-template-columns:1fr auto;gap:8px}
+    .card-actions .btn{padding:11px 12px;font-size:11px}
+    .btn-dark{background:var(--deep);color:white}
+    .btn-dark:hover{background:#203a2d}
+    .text-btn{background:transparent;border:1px solid var(--line);color:#4d5e53}
+    .notice{display:flex;gap:12px;background:#fff9e9;border:1px solid #f1e6c5;border-radius:15px;padding:15px 17px;margin-top:22px;color:#7c6937;font-size:12px;line-height:1.6}
+    .notice strong{color:#5e4d23}
+    .how{background:#eef4eb}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;margin-top:27px}
+    .step{background:white;border:1px solid #e1eadc;border-radius:19px;padding:23px}
+    .step-no{height:37px;width:37px;border-radius:12px;background:var(--deep);color:var(--green);display:grid;place-items:center;font:800 13px Manrope,sans-serif;margin-bottom:18px}
+    .step h3{font:800 15px Manrope,sans-serif;margin-bottom:8px}
+    .step p{font-size:12px;line-height:1.75;color:var(--muted);margin:0}
+    .owner-cta{padding:0 0 65px}
+    .cta-panel{background:var(--deep);color:white;border-radius:26px;padding:36px 39px;display:flex;align-items:center;justify-content:space-between;gap:25px;position:relative;overflow:hidden}
+    .cta-panel:after{content:"";position:absolute;width:300px;height:300px;border:1px solid rgba(186,243,106,.13);border-radius:50%;right:12%;top:-200px;box-shadow:0 0 0 35px rgba(186,243,106,.025),0 0 0 70px rgba(186,243,106,.02)}
+    .cta-panel>div,.cta-panel>a{position:relative;z-index:1}
+    .cta-panel h2{font-size:clamp(24px,3vw,33px);margin-bottom:9px}
+    .cta-panel p{color:#b7c6bb;font-size:13px;line-height:1.7;margin:0;max-width:600px}
+    .footer{background:#eaf0e8;border-top:1px solid #dfe8dc;padding:27px 0;color:#718076;font-size:11px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:15px}
+    .footer .brand{color:var(--ink);font-size:16px}.footer .brand-mark{height:30px;width:30px;border-radius:10px;font-size:16px}
+    .demo-badge{display:inline-block;border:1px solid #f0d8a1;background:#fff7e5;color:#896b26;padding:5px 8px;border-radius:7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase}
+    .empty{grid-column:1/-1;background:white;border:1px dashed #cbd8c8;padding:35px;text-align:center;border-radius:18px;color:var(--muted)}
+    .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(5,16,10,.65);z-index:10;padding:20px;align-items:center;justify-content:center}
     .modal-backdrop.open{display:flex}
-    .modal{background:white;border-radius:22px;padding:25px;width:min(100%,520px);max-height:90vh;overflow:auto;box-shadow:0 30px 90px rgba(0,0,0,.28)}
-    .modal-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:20px}
-    .modal-head h3{font:800 20px Manrope,sans-serif;margin:0}
-    .close{border:0;background:#edf3ea;height:35px;width:35px;border-radius:11px;font-size:21px;cursor:pointer;color:#334c3a}
-    .form-row{margin-bottom:14px}
-    .form-row label{display:block;font-size:12px;font-weight:700;margin-bottom:7px;color:#4f6055}
-    .form-row input{width:100%;border:1px solid #dce5da;border-radius:11px;padding:12px;outline:none;color:var(--ink)}
-    .form-row input:focus{border-color:#8ac36b;box-shadow:0 0 0 3px rgba(138,195,107,.13)}
-    .form-help{font-size:11px;color:#839087;line-height:1.7;margin:12px 0 0}
-    .toast{position:fixed;z-index:80;bottom:22px;left:50%;transform:translateX(-50%);background:#10211b;color:white;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:13px 17px;font-size:12px;box-shadow:0 15px 40px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:.2s;max-width:calc(100% - 32px)}
-    .toast.show{opacity:1}
-    @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:38px}.visual-card{max-width:520px;transform:none}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.navlinks{gap:15px}}
-    @media(max-width:620px){.shell{width:calc(100% - 28px)}.nav{height:66px}.navlinks{display:none}.mobile-menu{display:inline-flex}.nav-actions .btn-ghost{display:none}.hero{padding:48px 0 55px}.hero-grid{gap:30px}h1{letter-spacing:-2px}.searchbox{flex-wrap:wrap}.searchbox input{min-height:42px}.searchbox .btn{width:100%}.section{padding:48px 0}.section-head{align-items:flex-start;flex-direction:column}.stat-strip{grid-template-columns:1fr;gap:9px}.stat{padding:14px 16px}.cards{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.owner-cta{padding:28px 22px}.footer-inner{align-items:flex-start;flex-direction:column}.card-actions{gap:7px}.card-actions .btn{padding:11px 12px;font-size:12px}}
+    .modal{background:white;border-radius:22px;padding:25px;width:min(460px,100%);box-shadow:0 25px 90px #07110b66}
+    .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}
+    .modal h3{font:800 21px Manrope,sans-serif;margin:0}
+    .close{border:0;background:#f0f4ee;width:35px;height:35px;border-radius:11px;font-size:20px;cursor:pointer}
+    .form-row{margin:13px 0}.form-row label{display:block;font-size:11px;font-weight:700;margin-bottom:7px;color:#526258}
+    .form-row input,.form-row select,.form-row textarea{width:100%;border:1px solid #dce5db;border-radius:11px;padding:12px;outline:none;background:#fbfcfa;color:var(--ink)}
+    .form-row input:focus,.form-row textarea:focus{border-color:#88b96d;box-shadow:0 0 0 3px #baf36a33}
+    .form-help{font-size:10px;color:#829087;line-height:1.6}
+    .toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:var(--deep);color:white;padding:13px 17px;border-radius:13px;box-shadow:var(--shadow);font-size:12px;z-index:20;transition:.25s;max-width:calc(100% - 30px);text-align:center}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:900px){.hero-grid{grid-template-columns:1fr .8fr;gap:28px}h1{font-size:49px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.navlinks{gap:15px}}
+    @media(max-width:700px){.shell{width:min(100% - 28px,560px)}.nav{height:68px}.navlinks{display:none}.nav-actions .btn-ghost{display:none}.mobile-menu{display:inline-flex}.hero{padding:47px 0 51px}.hero-grid{grid-template-columns:1fr;gap:34px}h1{font-size:45px;letter-spacing:-2.2px}.hero-copy{font-size:14px}.visual-card{max-width:430px;margin:auto;transform:none}.hero:after{right:-180px;top:45%}.section{padding:48px 0}.section-head{align-items:flex-start;flex-direction:column}.stat-strip{gap:8px}.stat{padding:13px 10px;gap:8px;align-items:flex-start;flex-direction:column}.stat-icon{height:34px;width:34px;font-size:15px}.stat strong{font-size:18px}.stat small{font-size:9px}.library-section{padding-top:20px}.cards{grid-template-columns:1fr}.card-art{height:115px}.toolbar{display:grid;grid-template-columns:1fr 1fr}.toolbar .filter-select:first-child{grid-column:1/-1}.results-count{grid-column:1/-1;margin:0}.steps{grid-template-columns:1fr}.cta-panel{padding:26px 22px;align-items:flex-start;flex-direction:column}.footer-inner{align-items:flex-start;flex-direction:column}.searchbox{gap:3px}.searchbox .btn{padding:12px}.search-icon{width:31px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="shell nav">
-      <a class="brand" href="#"><span class="brand-mark">D</span><span>drishti<small>STUDY • FIND YOUR FOCUS</small></span></a>
-      <nav class="navlinks"><a href="#libraries">Explore libraries</a><a href="#how">How it works</a><a href="#owners">For owners</a></nav>
-      <div class="nav-actions"><a class="btn btn-ghost" href="#how">How it works</a><a class="btn btn-primary" href="#libraries">Find a seat ↗</a></div>
+      <a class="brand" href="#" aria-label="Drishti Study home">
+        <span class="brand-mark">D</span><span>drishti<small>STUDY • FIND YOUR FOCUS</small></span>
+      </a>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="#libraries">Find a library</a><a href="#how-it-works">How it works</a><a href="#owners">For library owners</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="#how-it-works">How it works</a>
+        <button class="btn btn-primary" id="suggestTop">List your library <span>↗</span></button>
+      </div>
     </div>
   </header>
 
@@ -157,66 +171,71 @@
     <section class="hero">
       <div class="shell hero-grid">
         <div>
-          <span class="eyebrow"><span class="pulse"></span> Study spaces, made easier</span>
-          <h1>Find your next <span>focus space.</span></h1>
-          <p class="hero-copy">Explore libraries, compare monthly fees, and check recently reported seat availability before you leave home.</p>
+          <div class="eyebrow"><span class="pulse"></span> A smarter way to find your study space</div>
+          <h1>Your next study spot.<br><span>Already found.</span></h1>
+          <p class="hero-copy">Discover libraries, compare monthly fees, and check the latest reported seat availability—before you leave home.</p>
           <form class="searchbox" id="searchForm">
-            <span class="search-icon">⌕</span>
-            <input id="searchInput" type="search" placeholder="Search by library, area, or city..." />
-            <button class="btn btn-primary" type="submit">Explore spaces ↗</button>
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="searchInput" type="search" placeholder="Search by library or area…" aria-label="Search libraries" />
+            <button class="btn btn-primary" type="submit">Find a seat <span>→</span></button>
           </form>
-          <p class="hero-note">Availability is <strong>owner-reported</strong>. Always confirm before visiting.</p>
+          <p class="hero-note"><strong>Built for focused minds.</strong> Availability is based on the library's latest report, not a guaranteed reservation.</p>
         </div>
-        <div class="visual-card">
-          <div class="visual-head"><strong>Your next study spot</strong><span class="live-pill">● LISTINGS</span></div>
-          <div class="visual-map"><div class="map-lines"></div><div class="map-road"></div><div class="map-road two"></div><div class="map-pin"><span>D</span></div><div class="map-caption">Find your focus · Bikaner</div></div>
+        <div class="visual-card" aria-label="Preview of library availability">
+          <div class="visual-head"><div><div class="tiny-label">Your study day, simplified</div><strong>Find a seat near you</strong></div><span class="live-pill"><span class="pulse"></span> LIVE-STYLE PREVIEW</span></div>
+          <div class="visual-map"><div class="map-lines"></div><div class="map-road"></div><div class="map-road two"></div><div class="map-pin"><span> D </span></div><div class="map-caption">Study spaces around you</div></div>
           <div class="mini-list">
-            <div class="mini-row"><div class="mini-icon">📚</div><div class="mini-info"><strong>Quiet study environment</strong><small>Compare spaces near you</small></div><div class="mini-seats"><strong>Explore</strong><small>libraries</small></div></div>
-            <div class="mini-row"><div class="mini-icon">◷</div><div class="mini-info"><strong>Reported seat counts</strong><small>Check the last update</small></div><div class="mini-seats"><strong>Before</strong><small>you go</small></div></div>
+            <div class="mini-row"><div class="mini-icon">📚</div><div class="mini-info"><strong>Quiet Corner Library</strong><small>Central area · Demo listing</small></div><div class="mini-seats"><strong>12 seats</strong><small>reported free</small></div></div>
+            <div class="mini-row"><div class="mini-icon">🌿</div><div class="mini-info"><strong>Focus Study Hub</strong><small>Near coaching zone · Demo</small></div><div class="mini-seats"><strong>7 seats</strong><small>reported free</small></div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" style="padding-bottom:25px">
       <div class="shell">
-        <div class="section-head"><div><div class="kicker">A clearer way to choose</div><h2>Know before you go.</h2><p class="section-sub">Compare seat availability, monthly fees, and library details in one place.</p></div></div>
         <div class="stat-strip">
-          <div class="stat"><span class="stat-icon">▤</span><div><strong id="statLibraries">0</strong><small>Library listings</small></div></div>
-          <div class="stat"><span class="stat-icon">◉</span><div><strong id="statSeats">0</strong><small>Recently reported available seats</small></div></div>
-          <div class="stat"><span class="stat-icon">↻</span><div><strong>Owner</strong><small>Reported updates</small></div></div>
+          <div class="stat"><div class="stat-icon">💺</div><div><strong id="statSeats">—</strong><small>Reported seats available</small></div></div>
+          <div class="stat"><div class="stat-icon">📍</div><div><strong id="statLibraries">—</strong><small>Libraries listed</small></div></div>
+          <div class="stat"><div class="stat-icon">🕒</div><div><strong>Timestamped</strong><small>See when details were updated</small></div></div>
         </div>
       </div>
     </section>
 
     <section class="section library-section" id="libraries">
       <div class="shell">
-        <div class="section-head"><div><div class="kicker">Explore spaces</div><h2>Libraries near your focus.</h2><p class="section-sub">Search by area, compare fees, and view reported seat availability.</p></div></div>
+        <div class="section-head">
+          <div><div class="kicker">Your focus starts here</div><h2>Find your kind of quiet.</h2><p class="section-sub">Browse owner-listed study spaces and check their latest reported availability.</p></div>
+          <span class="demo-badge">Owner-listed data</span>
+        </div>
         <div class="toolbar">
-          <select class="filter-select" id="areaFilter"><option value="">All areas</option><option value="Bikaner">Bikaner</option><option value="Nokha">Nokha</option><option value="Central">Central</option></select>
-          <select class="filter-select" id="availabilityFilter"><option value="all">Any availability</option><option value="available">Recently reported seats</option><option value="full">Currently full</option></select>
-          <select class="filter-select" id="feeFilter"><option value="">Sort by fee</option><option value="low">Fee: low to high</option><option value="high">Fee: high to low</option><option value="seats">Most available seats</option></select>
-          <span class="results-count" id="resultsCount">Loading listings…</span>
+          <select class="filter-select" id="areaFilter" aria-label="Filter by city"><option value="">All cities</option></select>
+          <select class="filter-select" id="availabilityFilter" aria-label="Filter by seat availability"><option value="all">Any availability</option><option value="available">Seats available</option><option value="full">Currently full</option></select>
+          <select class="filter-select" id="feeFilter" aria-label="Sort by fee"><option value="recommended">Recommended order</option><option value="low">Fee: low to high</option><option value="high">Fee: high to low</option><option value="seats">Most seats available</option></select>
+          <span class="results-count" id="resultsCount" aria-live="polite">Loading library listings…</span>
         </div>
         <div class="cards" id="libraryCards"></div>
-        <div class="form-help" style="margin-top:18px;background:#fff9e8;border:1px solid #f0e6c7;padding:15px;border-radius:15px">ⓘ <strong>Availability transparency:</strong> Seat counts shown here are owner-reported. A recent report still cannot guarantee a seat. Contact the library to confirm before visiting.</div>
+        <div class="notice"><span>ⓘ</span><div><strong>Availability transparency:</strong> Seat counts and fees are based on the latest information saved by the library owner. In the live version, each library's authorised owner will update availability and the page will show the last reported time. A recent report still cannot guarantee a seat.</div></div>
       </div>
     </section>
 
-    <section class="section" id="how">
+    <section class="section how" id="how-it-works">
       <div class="shell">
-        <div class="section-head"><div><div class="kicker">Simple by design</div><h2>Three steps to your study space.</h2><p class="section-sub">Find a listing, check the latest report, and confirm with the library before travelling.</p></div></div>
+        <div class="kicker">Simple by design</div><h2>Less searching. More studying.</h2><p class="section-sub">Drishti Study is designed to make the journey from “Where should I study?” to “I'm ready to focus” simpler.</p>
         <div class="steps">
-          <div class="step"><div class="step-no">01</div><h3>Explore spaces</h3><p>Search by area, compare fees, and view reported seat availability without calling every library first.</p></div>
-          <div class="step"><div class="step-no">02</div><h3>Check the update</h3><p>Every availability report includes the time it was last updated, helping you decide whether to reconfirm.</p></div>
-          <div class="step"><div class="step-no">03</div><h3>Contact before you go</h3><p>Reach out to the library to confirm a seat. Reservation and automatic seat counting may be added later.</p></div>
+          <article class="step"><div class="step-no">01</div><h3>Explore spaces</h3><p>Search by area, compare fees, and view reported seat availability without calling every library first.</p></article>
+          <article class="step"><div class="step-no">02</div><h3>Check the update</h3><p>Every availability report will include a timestamp, so you can judge how fresh the information is.</p></article>
+          <article class="step"><div class="step-no">03</div><h3>Contact before you go</h3><p>Reach out to the library to confirm a seat. Reservation and automatic seat counting may be added later.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="owners">
+    <section class="owner-cta" id="owners">
       <div class="shell">
-        <div class="owner-cta"><div class="owner-cta-content"><div class="kicker" style="color:var(--green)">For library owners</div><h2>Help students find their focus.</h2><p>Put your library on the map, share your fees and opening hours, and keep seat availability up to date. We're onboarding the first pilot libraries.</p><a class="btn btn-primary" href="owner.html">Open owner portal ↗</a></div></div>
+        <div class="cta-panel">
+          <div><div class="kicker" style="color:var(--green)">For library owners</div><h2>Help students find their focus.</h2><p>Put your library on the map, share your fees and opening hours, and keep seat availability up to date. We're onboarding the first pilot libraries.</p></div>
+          <button class="btn btn-primary" id="suggestBottom">Register interest <span>↗</span></button>
+        </div>
       </div>
     </section>
   </main>
@@ -243,7 +262,6 @@
       </form>
     </div>
   </div>
-
   <div class="modal-backdrop" id="detailsBackdrop" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
     <div class="modal">
       <div class="modal-head"><h3 id="detailsTitle">Library details</h3><button class="close" id="closeDetails" aria-label="Close details">×</button></div>
@@ -251,10 +269,10 @@
       <button class="btn btn-dark" id="detailsDone" type="button" style="width:100%;margin-top:14px">Done</button>
     </div>
   </div>
-
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
+    // DEMO ONLY: replace this local sample with a secured Supabase read endpoint after RLS policies are configured.
     let demoLibraries = [
       {id:1,name:"Quiet Corner Library",area:"Central",city:"Bikaner",address:"Central area · Demo location",total:80,available:12,fee:800,open:true,updatedMinutes:8,verified:false},
       {id:2,name:"Focus Study Hub",area:"Bikaner",city:"Bikaner",address:"Coaching zone · Demo location",total:100,available:7,fee:1000,open:true,updatedMinutes:24,verified:false},
@@ -263,7 +281,6 @@
       {id:5,name:"Scholar's Space",area:"Nokha",city:"Nokha",address:"Nokha · Demo location",total:70,available:16,fee:750,open:false,updatedMinutes:150,verified:false},
       {id:6,name:"Study Nest",area:"Bikaner",city:"Bikaner",address:"Bikaner · Demo location",total:110,available:4,fee:1200,open:true,updatedMinutes:39,verified:false}
     ];
-
     const cards = document.getElementById('libraryCards');
     const areaFilter = document.getElementById('areaFilter');
     const availabilityFilter = document.getElementById('availabilityFilter');
@@ -272,7 +289,6 @@
     const resultsCount = document.getElementById('resultsCount');
     const toast = document.getElementById('toast');
     const rupee = n => '₹' + Number(n).toLocaleString('en-IN');
-
     function updatedText(mins){
       if(!Number.isFinite(mins) || mins < 0) return 'Update time unavailable';
       if(mins < 1) return 'Updated just now';
@@ -280,48 +296,37 @@
       if(mins < 1440) return `Updated ${Math.floor(mins/60)} hr ago`;
       return `Updated ${Math.floor(mins/1440)} day(s) ago`;
     }
-
     function seatLabel(lib){
       if(!lib.open) return ['Closed','closed'];
       if(lib.updatedMinutes > 60) return ['Reconfirm availability','stale'];
       if(lib.available === 0) return ['Currently full','full'];
       return ['Seats reported available','available'];
     }
-
     function safeText(value){
       return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
     }
-
     function render(){
       let list = demoLibraries.filter(lib => {
         const q = searchInput.value.trim().toLowerCase();
         const matchesQuery = !q || [lib.name,lib.area,lib.city,lib.address].some(v=>String(v ?? '').toLowerCase().includes(q));
-        const matchesArea = !areaFilter.value || lib.area === areaFilter.value;
+        const matchesArea = !areaFilter.value || String(lib.city || lib.area || '').trim().toLowerCase() === areaFilter.value.toLowerCase();
         const matchesAvailability = availabilityFilter.value === 'all' ||
           (availabilityFilter.value === 'available' && lib.open && lib.available > 0 && lib.updatedMinutes <= 60) ||
           (availabilityFilter.value === 'full' && lib.open && lib.available === 0);
         return matchesQuery && matchesArea && matchesAvailability;
       });
-
       if(feeFilter.value === 'low') list.sort((a,b)=>a.fee-b.fee);
       if(feeFilter.value === 'high') list.sort((a,b)=>b.fee-a.fee);
       if(feeFilter.value === 'seats') list.sort((a,b)=>b.available-a.available);
-
       document.getElementById('statSeats').textContent = demoLibraries.reduce((n,l)=>n+(l.open && l.updatedMinutes<=60?l.available:0),0);
       document.getElementById('statLibraries').textContent = demoLibraries.length;
       resultsCount.textContent = `Showing ${list.length} of ${demoLibraries.length} listings`;
-
-      if(!list.length){
-        cards.innerHTML='<div class="empty"><strong>No matching libraries</strong><p style="margin:8px 0 0;font-size:12px">Try another search or clear your filters.</p></div>';
-        return;
-      }
-
+      if(!list.length){cards.innerHTML='<div class="empty"><strong>No matching libraries</strong><p style="margin:8px 0 0;font-size:12px">Try another search or clear your filters.</p></div>';return;}
       cards.innerHTML = list.map(lib=>{
         const [label,state]=seatLabel(lib);
         const pct = lib.total ? Math.max(0,Math.min(100,lib.available/lib.total*100)) : 0;
         const art = lib.area==='Nokha'?'📖':lib.name.includes('Green')?'🌿':lib.name.includes('Focus')?'✦':'▤';
         const isDemo = /demo/i.test(lib.name) || lib.isDemo === true;
-
         return `<article class="library-card">
           <div class="card-art"><span class="art-tag">● ${label}</span><span class="art-symbol">${art}</span><div class="art-bottom">${safeText(lib.area || lib.city || 'BIKANER').toUpperCase()}</div></div>
           <div class="card-body">
@@ -334,25 +339,12 @@
       }).join('');
     }
 
-    function showToast(message){
-      toast.textContent=message;
-      toast.classList.add('show');
-      clearTimeout(showToast.timer);
-      showToast.timer=setTimeout(()=>toast.classList.remove('show'),3200);
-    }
-
+    function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove('show'),3200);}
     [areaFilter,availabilityFilter,feeFilter].forEach(el=>el.addEventListener('change',render));
     searchInput.addEventListener('input',render);
-
-    document.getElementById('searchForm').addEventListener('submit',e=>{
-      e.preventDefault();
-      document.getElementById('libraries').scrollIntoView({behavior:'smooth'});
-      render();
-    });
-
+    document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('libraries').scrollIntoView({behavior:'smooth'});render();});
     const detailsBackdrop=document.getElementById('detailsBackdrop');
     function closeDetails(){detailsBackdrop.classList.remove('open');}
-
     function openDetails(lib){
       if(!lib) return;
       document.getElementById('detailsTitle').textContent=lib.name;
@@ -365,24 +357,15 @@
         <p class="form-help">Availability is owner-reported and is not a reservation. Contact the library to confirm before visiting. A contact number has not been added to this listing yet.</p>`;
       detailsBackdrop.classList.add('open');
     }
-
     cards.addEventListener('click',e=>{
       const detailBtn=e.target.closest('[data-details]');
-      if(detailBtn){
-        openDetails(demoLibraries.find(x=>String(x.id)===String(detailBtn.dataset.details)));
-        return;
-      }
+      if(detailBtn){openDetails(demoLibraries.find(x=>String(x.id)===String(detailBtn.dataset.details)));return;}
       const contactBtn=e.target.closest('[data-contact]');
-      if(contactBtn){
-        const lib=demoLibraries.find(x=>String(x.id)===String(contactBtn.dataset.contact));
-        showToast(`${lib?.name || 'Library'}: contact details have not been added yet.`);
-      }
+      if(contactBtn){const lib=demoLibraries.find(x=>String(x.id)===String(contactBtn.dataset.contact));showToast(`${lib?.name || 'Library'}: contact details have not been added yet.`);}
     });
-
     document.getElementById('closeDetails').addEventListener('click',closeDetails);
     document.getElementById('detailsDone').addEventListener('click',closeDetails);
     detailsBackdrop.addEventListener('click',e=>{if(e.target===detailsBackdrop)closeDetails();});
-
     const backdrop=document.getElementById('modalBackdrop');
     function openModal(){backdrop.classList.add('open');document.getElementById('ownerName').focus();}
     function closeModal(){backdrop.classList.remove('open');}
@@ -391,54 +374,70 @@
     document.getElementById('closeModal').addEventListener('click',closeModal);
     backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeModal();});
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-    document.getElementById('interestForm').addEventListener('submit',e=>{
-      e.preventDefault();
-      closeModal();
-      e.target.reset();
-      showToast('Prototype form only — no details were sent or saved. Backend connection is the next step.');
-    });
-
+    document.getElementById('interestForm').addEventListener('submit',e=>{e.preventDefault();closeModal();e.target.reset();showToast('Prototype form only — no details were sent or saved. Backend connection is the next step.');});
     document.getElementById('year').textContent=new Date().getFullYear();
     render();
-
     const SUPABASE_URL = "https://evlrjnkxnpdlltfgnssk.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_A7Louxud_hNS9YQxn8iQsQ_ODoSZP0Y";
+const SUPABASE_KEY = "sb_publishable_A7Louxud_hNS9YQxn8iQsQ_ODoSZP0Y";
 
-    async function loadLibrariesFromSupabase(){
-      try{
-        const response=await fetch(
-          `${SUPABASE_URL}/rest/v1/libraries?select=id,name,city,address,total_seats,available_seats,monthly_fee,is_open,last_updated&order=name.asc`,
-          {headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}}
+async function loadLibrariesFromSupabase() {
+    try {
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/libraries?select=id,name,city,address,total_seats,available_seats,monthly_fee,is_open,last_updated&order=name.asc`,
+            {
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`
+                }
+            }
         );
 
-        if(!response.ok) throw new Error(`Supabase error: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`Supabase error: ${response.status}`);
+        }
 
-        const rows=await response.json();
+        const rows = await response.json();
 
-        demoLibraries=rows.map(row=>({
-          id:row.id,
-          name:row.name,
-          area:row.city==="Nokha"?"Nokha":"Bikaner",
-          city:row.city||"Bikaner",
-          address:row.address||row.city||"Address unavailable",
-          total:row.total_seats,
-          available:row.available_seats,
-          fee:row.monthly_fee||0,
-          open:row.is_open,
-          updatedMinutes:Math.max(0,Math.floor((Date.now()-new Date(row.last_updated).getTime())/60000)),
-          verified:true,
-          isDemo:/demo/i.test(row.name)
+        demoLibraries = rows.map((row, index) => ({
+            id: row.id,
+            name: row.name,
+            area: row.city || "Other",
+            city: row.city || "Bikaner",
+            address: row.address || row.city || "Address unavailable",
+            total: row.total_seats,
+            available: row.available_seats,
+            fee: row.monthly_fee || 0,
+            open: row.is_open,
+            updatedMinutes: Math.max(
+                0,
+                Math.floor(
+                    (Date.now() - new Date(row.last_updated).getTime()) / 60000
+                )
+            ),
+            verified: true,
+            isDemo: /demo/i.test(row.name)
         }));
 
+        // Build the city filter from the actual database, not a hard-coded list.
+        const selectedCity = areaFilter.value;
+        const cities = [...new Set(demoLibraries.map(lib => String(lib.city || lib.area || "").trim()).filter(Boolean))]
+            .sort((a, b) => a.localeCompare(b));
+        areaFilter.innerHTML = '<option value="">All cities</option>' + cities.map(city =>
+            `<option value="${safeText(city)}">${safeText(city)}</option>`
+        ).join("");
+        if (cities.some(city => city.toLowerCase() === selectedCity.toLowerCase())) {
+            areaFilter.value = selectedCity;
+        }
         render();
-        console.log("Supabase libraries loaded:",rows.length);
-      }catch(error){
-        console.error("Supabase connection failed:",error);
-        showToast("Database connection failed. Demo data is being shown.");
-      }
-    }
+        console.log("Supabase libraries loaded:", rows.length);
 
-    loadLibrariesFromSupabase();
+    } catch (error) {
+        console.error("Supabase connection failed:", error);
+        showToast("Database connection failed. Demo data is being shown.");
+    }
+}
+
+loadLibrariesFromSupabase();
   </script>
 </body>
 </html>
