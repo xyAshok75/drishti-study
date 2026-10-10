@@ -134,9 +134,9 @@
     .footer .brand{color:var(--ink);font-size:16px}.footer .brand-mark{height:30px;width:30px;border-radius:10px;font-size:16px}
     .demo-badge{display:inline-block;border:1px solid #f0d8a1;background:#fff7e5;color:#896b26;padding:5px 8px;border-radius:7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase}
     .empty{grid-column:1/-1;background:white;border:1px dashed #cbd8c8;padding:35px;text-align:center;border-radius:18px;color:var(--muted)}
-    .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(5,16,10,.65);z-index:10;padding:20px;align-items:center;justify-content:center}
+    .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(5,16,10,.65);z-index:10;padding:12px;align-items:flex-start;justify-content:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
     .modal-backdrop.open{display:flex}
-    .modal{background:white;border-radius:22px;padding:25px;width:min(460px,100%);box-shadow:0 25px 90px #07110b66}
+    .modal{background:white;border-radius:22px;padding:25px;width:min(460px,100%);max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;box-shadow:0 25px 90px #07110b66;margin:auto 0}
     .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}
     .modal h3{font:800 21px Manrope,sans-serif;margin:0}
     .close{border:0;background:#f0f4ee;width:35px;height:35px;border-radius:11px;font-size:20px;cursor:pointer}
