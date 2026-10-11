@@ -260,17 +260,10 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    // Live library data is loaded from Supabase; demo records are only a fallback.
+    // Only live, non-demo library records are shown. No demo fallback is used.
     let userLocation = null;
     let nearbyMode = false;
-    let demoLibraries = [
-      {id:1,name:"Quiet Corner Library",area:"Central",city:"Bikaner",address:"Central area · Demo location",total:80,available:12,fee:800,open:true,updatedMinutes:8,verified:false},
-      {id:2,name:"Focus Study Hub",area:"Bikaner",city:"Bikaner",address:"Coaching zone · Demo location",total:100,available:7,fee:1000,open:true,updatedMinutes:24,verified:false},
-      {id:3,name:"The Reading Room",area:"Nokha",city:"Nokha",address:"Nokha · Demo location",total:60,available:0,fee:650,open:true,updatedMinutes:72,verified:false},
-      {id:4,name:"Green Desk Library",area:"Central",city:"Bikaner",address:"Central area · Demo location",total:90,available:21,fee:900,open:true,updatedMinutes:14,verified:false},
-      {id:5,name:"Scholar's Space",area:"Nokha",city:"Nokha",address:"Nokha · Demo location",total:70,available:16,fee:750,open:false,updatedMinutes:150,verified:false},
-      {id:6,name:"Study Nest",area:"Bikaner",city:"Bikaner",address:"Bikaner · Demo location",total:110,available:4,fee:1200,open:true,updatedMinutes:39,verified:false}
-    ];
+    let demoLibraries = [];
     const cards = document.getElementById('libraryCards');
     const areaFilter = document.getElementById('areaFilter');
     const availabilityFilter = document.getElementById('availabilityFilter');
@@ -411,8 +404,9 @@ async function loadLibrariesFromSupabase() {
         }
 
         const rows = await response.json();
+        const liveRows = rows.filter(row => !/demo/i.test(String(row.name || "")));
 
-        demoLibraries = rows.map((row, index) => ({
+        demoLibraries = liveRows.map((row, index) => ({
             id: row.id,
             name: row.name,
             area: row.city || "Other",
@@ -454,7 +448,9 @@ async function loadLibrariesFromSupabase() {
 
     } catch (error) {
         console.error("Supabase connection failed:", error);
-        showToast("Database connection failed. Demo data is being shown.");
+        demoLibraries = [];
+        render();
+        showToast("Could not load libraries. Please refresh and try again.");
     }
 }
 
