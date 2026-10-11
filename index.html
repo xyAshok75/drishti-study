@@ -344,20 +344,37 @@
     async function openDetails(lib){
       if(!lib) return;
       const uuidLike=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(lib.id));
+      const content=document.getElementById('detailsContent');
       document.getElementById('detailsTitle').textContent=lib.name;
-      document.getElementById('detailsContent').innerHTML=`
+      detailsBackdrop.classList.add('open');
+      content.innerHTML='<p class="section-sub" style="font-size:13px">Loading library details…</p>';
+      let slotHtml='';
+      if(uuidLike){
+        const slots=await fetchLibrarySlots(lib.id);
+        if(slots.length){
+          slotHtml=`<section class="review-booking"><h4>⏰ Time slots & monthly fees</h4><div class="review-list">${slots.map(slot=>{
+            const start=String(slot.start_time||'').slice(0,5);
+            const end=String(slot.end_time||'').slice(0,5);
+            const label=slot.slot_type==='full_day'?'Full Day':safeText(slot.slot_name||'Custom slot');
+            return `<article class="review-item"><strong>${label}</strong><div>${safeText(start)}–${safeText(end)}</div><div>${Number(slot.available_seats)||0} / ${Number(slot.total_seats)||0} seats available</div><div><strong>${rupee(slot.monthly_fee)} / month</strong></div></article>`;
+          }).join('')}</div></section>`;
+        } else {
+          slotHtml='<section class="review-booking"><h4>⏰ Time slots</h4><p class="booking-note">No custom slots have been published by this library yet. Contact the owner to confirm timings and availability.</p></section>';
+        }
+      }
+      content.innerHTML=`
         <p class="section-sub" style="font-size:13px;margin-bottom:16px">${safeText(lib.address || lib.city || 'Address not provided')}</p>
         ${slotHtml}
-        <div class="step" style="padding:16px;margin:10px 0"><strong>Seat availability</strong><p style="margin:7px 0 0;color:var(--muted)">${Number(lib.available)||0} available out of ${Number(lib.total)||0} total seats</p></div>
-        <div class="step" style="padding:16px;margin:10px 0"><strong>Monthly fee</strong><p style="margin:7px 0 0;color:var(--muted)">${rupee(lib.fee)} per month</p></div>
+        <div class="step" style="padding:16px;margin:10px 0"><strong>Seat availability (overall)</strong><p style="margin:7px 0 0;color:var(--muted)">${Number(lib.available)||0} available out of ${Number(lib.total)||0} total seats</p></div>
+        <div class="step" style="padding:16px;margin:10px 0"><strong>Monthly fee (overall)</strong><p style="margin:7px 0 0;color:var(--muted)">${rupee(lib.fee)} per month</p></div>
         <div class="step" style="padding:16px;margin:10px 0"><strong>Status</strong><p style="margin:7px 0 0;color:var(--muted)">${lib.open?'Currently marked open':'Currently marked closed'}</p></div>
         <div class="step" style="padding:16px;margin:10px 0"><strong>Last update</strong><p style="margin:7px 0 0;color:var(--muted)">${updatedText(lib.updatedMinutes)}</p></div>
         ${contactActions(lib)}
-        ${uuidLike ? `<section class="review-booking"><h4>⭐ Ratings & reviews</h4><div id="reviewSummary" class="review-summary">Loading reviews…</div><div id="reviewList" class="review-list"></div><form id="reviewForm" class="review-form"><input id="reviewName" maxlength="60" required placeholder="Your name"><select id="reviewRating" required aria-label="Rating"><option value="5">★★★★★ — Excellent (5)</option><option value="4">★★★★☆ — Very good (4)</option><option value="3">★★★☆☆ — Good (3)</option><option value="2">★★☆☆☆ — Fair (2)</option><option value="1">★☆☆☆☆ — Poor (1)</option></select><textarea id="reviewText" maxlength="600" placeholder="Share your experience (optional)"></textarea><button class="btn btn-outline" type="submit">Submit review</button></form></section>` : `<p class="form-help" style="margin-top:12px">Ratings and booking are available for live owner-listed libraries, not demo listings.</p>`}
+        ${uuidLike ? `<section class="review-booking"><h4>⭐ Ratings & reviews</h4><div id="reviewSummary" class="review-summary">Loading reviews…</div><div id="reviewList" class="review-list"></div><form id="reviewForm" class="review-form"><input id="reviewName" maxlength="60" required placeholder="Your name"><select id="reviewRating" required aria-label="Rating"><option value="5">★★★★★ — Excellent (5)</option><option value="4">★★★★☆ — Very good (4)</option><option value="3">★★★☆☆ — Good (3)</option><option value="2">★★☆☆☆ — Fair (2)</option><option value="1">★☆☆☆☆ — Poor (1)</option></select><textarea id="reviewText" maxlength="600" placeholder="Share your experience (optional)"></textarea><button class="btn btn-outline" type="submit">Submit review</button></form></section>` : `<p class="form-help" style="margin-top:12px">Ratings are available for live owner-listed libraries.</p>`}
         <p class="form-help" style="margin-top:12px">Availability is owner-reported and is not a reservation. Confirm before visiting.</p>`;
-      detailsBackdrop.classList.add('open');
       if(uuidLike) { loadReviews(lib.id); document.getElementById('reviewForm').addEventListener('submit',e=>submitReview(e,lib)); }
     }
+
     async function submitReview(e,lib){
       e.preventDefault();const btn=e.submitter;btn.disabled=true;
       try{const payload={library_id:lib.id,reviewer_name:document.getElementById('reviewName').value.trim(),rating:Number(document.getElementById('reviewRating').value),review_text:document.getElementById('reviewText').value.trim()||null};
