@@ -164,7 +164,7 @@
       </nav>
       <div class="nav-actions">
         <a class="btn btn-ghost" href="#how-it-works">How it works</a>
-        <button class="btn btn-primary" id="suggestTop">List your library <span>↗</span></button>
+        <a class="btn btn-primary" href="owner.html">List your library <span>↗</span></a>
       </div>
     </div>
   </header>
@@ -236,7 +236,7 @@
       <div class="shell">
         <div class="cta-panel">
           <div><div class="kicker" style="color:var(--green)">For library owners</div><h2>Help students find their focus.</h2><p>Put your library on the map, share your fees and opening hours, and keep seat availability up to date. We're onboarding the first pilot libraries.</p></div>
-          <button class="btn btn-primary" id="suggestBottom">Register interest <span>↗</span></button>
+          <a class="btn btn-primary" href="owner.html">Open Owner Portal <span>↗</span></a>
         </div>
       </div>
     </section>
@@ -250,20 +250,6 @@
     </div>
   </footer>
 
-  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal">
-      <div class="modal-head"><h3 id="modalTitle">List your library</h3><button class="close" id="closeModal" aria-label="Close dialog">×</button></div>
-      <p class="section-sub" style="font-size:12px">We're preparing our first pilot. This form is a prototype and won't send data yet.</p>
-      <form id="interestForm">
-        <div class="form-row"><label for="ownerName">Your name</label><input id="ownerName" required placeholder="e.g. Rahul Sharma" /></div>
-        <div class="form-row"><label for="libraryName">Library name</label><input id="libraryName" required placeholder="Your library's name" /></div>
-        <div class="form-row"><label for="ownerPhone">Contact number</label><input id="ownerPhone" inputmode="tel" required placeholder="Phone number" /></div>
-        <div class="form-row"><label for="ownerArea">Area / city</label><input id="ownerArea" required placeholder="e.g. Nokha, Bikaner" /></div>
-        <button class="btn btn-dark" type="submit" style="width:100%">Submit interest <span>→</span></button>
-        <p class="form-help">Demo only: no information is saved or transmitted. A secure backend will be connected before launch.</p>
-      </form>
-    </div>
-  </div>
   <div class="modal-backdrop" id="detailsBackdrop" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
     <div class="modal">
       <div class="modal-head"><h3 id="detailsTitle">Library details</h3><button class="close" id="closeDetails" aria-label="Close details">×</button></div>
@@ -403,15 +389,6 @@
     document.getElementById('closeDetails').addEventListener('click',closeDetails);
     document.getElementById('detailsDone').addEventListener('click',closeDetails);
     detailsBackdrop.addEventListener('click',e=>{if(e.target===detailsBackdrop)closeDetails();});
-    const backdrop=document.getElementById('modalBackdrop');
-    function openModal(){backdrop.classList.add('open');document.getElementById('ownerName').focus();}
-    function closeModal(){backdrop.classList.remove('open');}
-    document.getElementById('suggestTop').addEventListener('click',openModal);
-    document.getElementById('suggestBottom').addEventListener('click',openModal);
-    document.getElementById('closeModal').addEventListener('click',closeModal);
-    backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeModal();});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-    document.getElementById('interestForm').addEventListener('submit',e=>{e.preventDefault();closeModal();e.target.reset();showToast('Prototype form only — no details were sent or saved. Backend connection is the next step.');});
     document.getElementById('year').textContent=new Date().getFullYear();
     render();
     const SUPABASE_URL = "https://evlrjnkxnpdlltfgnssk.supabase.co";
